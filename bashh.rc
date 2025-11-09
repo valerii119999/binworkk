@@ -1,0 +1,26 @@
+#!/bin/bash
+
+
+FILE=$1
+COMMAND=$2
+TASK=$3
+
+view_tasks() {
+    echo "Список задач:"
+    if [[ -f "$FILE" && -s "$FILE" ]]; then
+        cat -n "$FILE"
+    else
+        echo "Пусто"
+    fi
+}
+
+add_task() {
+    echo "$TASK" >> "$FILE"
+    echo "Добавлено: $TASK"
+}
+
+case $COMMAND in
+    "view") view_tasks ;;
+    "add") add_task ;;
+    *) echo "Использование: $0 <file> [view|add <task>]" ;;
+esac
